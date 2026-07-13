@@ -1,0 +1,29 @@
+generated: '2026-07-12'
+method: derived
+source: openapi/freee-openapi.yml
+summary:
+  types:
+  - oauth2
+schemes:
+- name: oauth2
+  type: oauth2
+  grantType: authorization_code
+  description: >-
+    freee unified OAuth 2.0. Register an application in the freee Developers
+    console to obtain a client_id and client_secret, send the user through the
+    authorization code grant, then exchange the code for an access token and
+    refresh token. The access token is presented on every API request as
+    `Authorization: Bearer <access_token>`. A single freee token works across
+    products (accounting, HR/payroll, invoicing) subject to the granted scopes.
+    Access tokens are short-lived and are renewed with the refresh token.
+  authorizationUrl: https://accounts.secure.freee.co.jp/public_api/authorize
+  tokenUrl: https://accounts.secure.freee.co.jp/public_api/token
+  scopes:
+  - name: read
+    description: データの読み取り (read data)
+  - name: write
+    description: データの書き込み (write data)
+  sources:
+  - openapi/freee-openapi.yml
+  - https://developer.freee.co.jp/reference/accounting/reference
+  - https://github.com/freee/freee-api-schema

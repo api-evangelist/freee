@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: freee
+providerId: freee
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Accounting
+- HR
+- Payroll
+- Rate Limiting
+- Quotas
+- Japan
+description: >-
+  freee applies per-endpoint access control rather than publishing a single
+  fixed numeric request-rate ceiling for every operation. When freee detects
+  excessive access to an endpoint within a period it returns HTTP 429 (Too Many
+  Requests) and includes rate-limit headers on the response (x-ratelimit-limit,
+  x-ratelimit-remaining, and x-ratelimit-reset with a reset timestamp). freee
+  may also return HTTP 403 when it detects sustained excessive access, with
+  access typically restored after roughly 10 minutes. Every response also carries
+  an X-Freee-Request-ID header useful for support and debugging.
+notes: >-
+  Exact per-endpoint numeric limits are not published as a single table and can
+  vary by endpoint and plan; treat the x-ratelimit-* response headers as the
+  source of truth at runtime and back off on 429 / 403. Values here are grounded
+  in freee's documented throttling behavior, not a reconciled per-endpoint quota
+  sheet - verify against the current freee API reference.
+sources:
+- https://developer.freee.co.jp/
+- https://developer.freee.co.jp/reference/accounting/reference
+- https://github.com/freee/freee-api-schema
+responseCodes:
+  throttled: 429
+  blocked: 403
+responseHeaders:
+- x-ratelimit-limit
+- x-ratelimit-remaining
+- x-ratelimit-reset
+- X-Freee-Request-ID
+limits:
+- name: Per-Endpoint Request Rate
+  scope: application-endpoint
+  metric: requests
+  limit: enforced (numeric limit surfaced via x-ratelimit-limit header)
+  notes: freee throttles high-frequency access per endpoint and returns 429 with x-ratelimit-* headers.
+- name: Sustained Excessive Access
+  scope: application
+  metric: requests
+  limit: blocked with 403
+  notes: Prolonged excessive access can return 403; access is typically restored after ~10 minutes.
+policies:
+- name: Backoff Strategy
+  description: On 429, honor the x-ratelimit-reset timestamp and retry after it passes; use exponential backoff with jitter. On 403 due to throttling, pause for roughly 10 minutes before retrying.
+- name: Request Correlation
+  description: Log the X-Freee-Request-ID from each response to correlate failures with freee support.
+- name: Incremental Polling
+  description: freee has no push transport; poll incrementally using date-range filters (for example start/end update dates on partners or wallet_txns) to minimize request volume.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

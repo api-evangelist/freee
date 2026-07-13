@@ -1,0 +1,272 @@
+{
+  "info": {
+    "name": "freee API (Accounting and HR/Payroll)",
+    "description": "A representative, hand-authored subset of the public freee REST APIs for freee Accounting (会計freee) and freee HR & Payroll (人事労務freee). Accounting endpoints live under https://api.freee.co.jp/api/1 and HR/payroll under https://api.freee.co.jp/hr/api/v1. Authenticate with an OAuth 2.0 (authorization code) access token sent as Authorization: Bearer <access_token>. Most requests are scoped to a freee company via company_id. Grounded in freee's own OpenAPI schemas (github.com/freee/freee-api-schema); a curated subset, not the full surface.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [ { "key": "token", "value": "{{accessToken}}", "type": "string" } ]
+  },
+  "variable": [
+    { "key": "accountingBaseUrl", "value": "https://api.freee.co.jp/api/1", "type": "string" },
+    { "key": "hrBaseUrl", "value": "https://api.freee.co.jp/hr/api/v1", "type": "string" },
+    { "key": "companyId", "value": "", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "List companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/companies", "host": ["{{accountingBaseUrl}}"], "path": ["companies"] },
+            "description": "Lists the freee companies (事業所) the authenticated user belongs to."
+          }
+        },
+        {
+          "name": "Get a company",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/companies/:id", "host": ["{{accountingBaseUrl}}"], "path": ["companies", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves details, account items, taxes, and settings for one company."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Deals",
+      "item": [
+        {
+          "name": "List deals",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/deals?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["deals"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Lists accounting deals / transactions (取引) for a company."
+          }
+        },
+        {
+          "name": "Create a deal",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"company_id\": 0,\n  \"issue_date\": \"2026-07-12\",\n  \"type\": \"expense\",\n  \"details\": [\n    { \"account_item_id\": 0, \"tax_code\": 0, \"amount\": 1000 }\n  ]\n}" },
+            "url": { "raw": "{{accountingBaseUrl}}/deals", "host": ["{{accountingBaseUrl}}"], "path": ["deals"] },
+            "description": "Creates a new accounting deal (取引)."
+          }
+        },
+        {
+          "name": "Get a deal",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/deals/:id?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["deals", ":id"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Retrieves a deal by ID."
+          }
+        },
+        {
+          "name": "Update a deal",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"company_id\": 0,\n  \"issue_date\": \"2026-07-12\",\n  \"type\": \"expense\",\n  \"details\": []\n}" },
+            "url": { "raw": "{{accountingBaseUrl}}/deals/:id", "host": ["{{accountingBaseUrl}}"], "path": ["deals", ":id"], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Updates an existing deal."
+          }
+        },
+        {
+          "name": "Delete a deal",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/deals/:id?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["deals", ":id"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ], "variable": [ { "key": "id", "value": "" } ] },
+            "description": "Deletes a deal."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Account Items",
+      "item": [
+        {
+          "name": "List account items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/account_items?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["account_items"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Lists the account items / chart of accounts (勘定科目) for a company."
+          }
+        },
+        {
+          "name": "Create an account item",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"company_id\": 0,\n  \"name\": \"\"\n}" },
+            "url": { "raw": "{{accountingBaseUrl}}/account_items", "host": ["{{accountingBaseUrl}}"], "path": ["account_items"] },
+            "description": "Creates a new account item."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Partners",
+      "item": [
+        {
+          "name": "List partners",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/partners?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["partners"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Lists trading partners / counterparties (取引先) for a company."
+          }
+        },
+        {
+          "name": "Create a partner",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"company_id\": 0,\n  \"name\": \"\"\n}" },
+            "url": { "raw": "{{accountingBaseUrl}}/partners", "host": ["{{accountingBaseUrl}}"], "path": ["partners"] },
+            "description": "Creates a new partner."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "List invoices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/invoices?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["invoices"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Lists issued invoices (請求書) for a company."
+          }
+        },
+        {
+          "name": "List quotations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/quotations?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["quotations"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Lists issued quotations / estimates (見積書) for a company."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wallet Transactions",
+      "item": [
+        {
+          "name": "List wallet transactions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/wallet_txns?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["wallet_txns"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Lists wallet transactions / statement lines (明細) for a company."
+          }
+        },
+        {
+          "name": "List walletables",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/walletables?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["walletables"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Lists walletables (口座) - bank accounts, credit cards, and wallets - for a company."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Journals and Reports",
+      "item": [
+        {
+          "name": "Request a journals export",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/journals?company_id={{companyId}}&download_type=csv", "host": ["{{accountingBaseUrl}}"], "path": ["journals"], "query": [ { "key": "company_id", "value": "{{companyId}}" }, { "key": "download_type", "value": "csv" } ] },
+            "description": "Starts an asynchronous export of journals (仕訳帳) for a company."
+          }
+        },
+        {
+          "name": "Get P&L trial balance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{accountingBaseUrl}}/reports/trial_pl?company_id={{companyId}}", "host": ["{{accountingBaseUrl}}"], "path": ["reports", "trial_pl"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Returns the profit-and-loss trial balance (試算表・損益計算書) for a company."
+          }
+        }
+      ]
+    },
+    {
+      "name": "HR - Employees",
+      "item": [
+        {
+          "name": "Get current HR user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{hrBaseUrl}}/users/me", "host": ["{{hrBaseUrl}}"], "path": ["users", "me"] },
+            "description": "Returns the authenticated user and the HR companies they can access."
+          }
+        },
+        {
+          "name": "List employees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{hrBaseUrl}}/employees?company_id={{companyId}}", "host": ["{{hrBaseUrl}}"], "path": ["employees"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ] },
+            "description": "Lists employees (従業員) for an HR company and month."
+          }
+        }
+      ]
+    },
+    {
+      "name": "HR - Payroll",
+      "item": [
+        {
+          "name": "List employee payroll statements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{hrBaseUrl}}/salaries/employee_payroll_statements?company_id={{companyId}}&year=2026&month=7", "host": ["{{hrBaseUrl}}"], "path": ["salaries", "employee_payroll_statements"], "query": [ { "key": "company_id", "value": "{{companyId}}" }, { "key": "year", "value": "2026" }, { "key": "month", "value": "7" } ] },
+            "description": "Lists employee salary payroll statements (給与明細) for a company and pay month."
+          }
+        }
+      ]
+    },
+    {
+      "name": "HR - Attendance",
+      "item": [
+        {
+          "name": "List time clocks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{hrBaseUrl}}/employees/:employee_id/time_clocks?company_id={{companyId}}", "host": ["{{hrBaseUrl}}"], "path": ["employees", ":employee_id", "time_clocks"], "query": [ { "key": "company_id", "value": "{{companyId}}" } ], "variable": [ { "key": "employee_id", "value": "" } ] },
+            "description": "Lists an employee's time-clock punches (打刻)."
+          }
+        },
+        {
+          "name": "Register a time clock",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"company_id\": 0,\n  \"type\": \"clock_in\"\n}" },
+            "url": { "raw": "{{hrBaseUrl}}/employees/:employee_id/time_clocks", "host": ["{{hrBaseUrl}}"], "path": ["employees", ":employee_id", "time_clocks"], "variable": [ { "key": "employee_id", "value": "" } ] },
+            "description": "Registers a time-clock punch (clock in / out / break) for an employee."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+aid: freee
+name: freee
+review:
+  question: Does freee expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Every documented freee public API - freee
+    Accounting (会計freee), freee HR & Payroll (人事労務freee), freee Invoicing
+    (freee請求書), and freee Sales Management (freee販売) - is request/response REST
+    over HTTPS. There is no server-push transport (WebSocket or SSE) on freee's
+    own APIs to model. freee's OpenAPI schemas
+    (github.com/freee/freee-api-schema) declare only HTTPS REST paths and an
+    OAuth 2.0 security scheme; no ws:// or wss:// channel is documented anywhere.
+findings:
+  summary: |
+    freee does not publish a documented public WebSocket API. freee K.K. is a
+    Japanese cloud accounting, invoicing, and HR/payroll SaaS. Its public APIs
+    are pure request/response REST over HTTPS. Accounting (会計freee) is served
+    under https://api.freee.co.jp/api/1 and HR/payroll (人事労務freee) under
+    https://api.freee.co.jp/hr/api/v1. Both are authenticated with OAuth 2.0
+    (authorization code grant), and the resulting access token is sent as
+    Authorization: Bearer <access_token>. No realtime, bidirectional, or
+    streaming WebSocket (ws:// or wss://) endpoint is documented on any freee
+    product API as of the review date. Change notification is done by polling
+    (for example listing wallet_txns or deals updated since a date), not by a
+    server-push socket.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.freee.co.jp/api/1
+      documented: true
+      note: freee Accounting API (会計freee). All operations are HTTPS REST with JSON.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.freee.co.jp/hr/api/v1
+      documented: true
+      note: freee HR & Payroll API (人事労務freee). All operations are HTTPS REST with JSON.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in any freee API reference or OpenAPI schema as of the review date.
+  auth: |
+    OAuth 2.0 authorization code grant. Authorization endpoint
+    https://accounts.secure.freee.co.jp/public_api/authorize, token endpoint
+    https://accounts.secure.freee.co.jp/public_api/token, scopes read and write.
+    A single unified freee access token works across products subject to granted
+    scope. The token is presented as an HTTP Bearer token.
+  endpointsConfirmedRest:
+    - GET    https://api.freee.co.jp/api/1/companies
+    - GET    https://api.freee.co.jp/api/1/companies/{id}
+    - GET    https://api.freee.co.jp/api/1/deals
+    - POST   https://api.freee.co.jp/api/1/deals
+    - GET    https://api.freee.co.jp/api/1/deals/{id}
+    - PUT    https://api.freee.co.jp/api/1/deals/{id}
+    - DELETE https://api.freee.co.jp/api/1/deals/{id}
+    - GET    https://api.freee.co.jp/api/1/account_items
+    - POST   https://api.freee.co.jp/api/1/account_items
+    - GET    https://api.freee.co.jp/api/1/partners
+    - POST   https://api.freee.co.jp/api/1/partners
+    - GET    https://api.freee.co.jp/api/1/invoices
+    - GET    https://api.freee.co.jp/api/1/quotations
+    - GET    https://api.freee.co.jp/api/1/wallet_txns
+    - POST   https://api.freee.co.jp/api/1/wallet_txns
+    - GET    https://api.freee.co.jp/api/1/walletables
+    - GET    https://api.freee.co.jp/api/1/journals
+    - GET    https://api.freee.co.jp/api/1/manual_journals
+    - POST   https://api.freee.co.jp/api/1/manual_journals
+    - GET    https://api.freee.co.jp/api/1/reports/trial_pl
+    - GET    https://api.freee.co.jp/api/1/taxes/codes
+    - GET    https://api.freee.co.jp/hr/api/v1/users/me
+    - GET    https://api.freee.co.jp/hr/api/v1/employees
+    - POST   https://api.freee.co.jp/hr/api/v1/employees
+    - GET    https://api.freee.co.jp/hr/api/v1/employees/{id}
+    - GET    https://api.freee.co.jp/hr/api/v1/salaries/employee_payroll_statements
+    - GET    https://api.freee.co.jp/hr/api/v1/employees/{employee_id}/time_clocks
+    - POST   https://api.freee.co.jp/hr/api/v1/employees/{employee_id}/time_clocks
+    - GET    https://api.freee.co.jp/hr/api/v1/employees/{employee_id}/work_records/{date}
+  endpointsModeled:
+    - note: |
+        The bundled OpenAPI (openapi/freee-openapi.yml) is a curated, high-fidelity
+        subset of freee's own published schemas. The freee Accounting schema
+        defines 91 paths and the HR schema 68 paths; only a representative slice
+        is reproduced here. Path shapes, the /api/1 and /hr/api/v1 bases, OAuth 2.0
+        scheme, and the company_id scoping are grounded in the real schemas;
+        individual response field sets in the subset are simplified and should be
+        verified against the official reference before production use.
+sources:
+  - url: https://developer.freee.co.jp/
+    type: Documentation
+    note: freee Developers Community home; getting-started and product references.
+  - url: https://developer.freee.co.jp/reference/accounting/reference
+    type: APIReference
+    note: freee Accounting (会計freee) REST API reference.
+  - url: https://developer.freee.co.jp/reference/hr/reference
+    type: APIReference
+    note: freee HR & Payroll (人事労務freee) REST API reference.
+  - url: https://github.com/freee/freee-api-schema
+    type: OpenAPI
+    note: freee's own OpenAPI 3.0 schemas - accounting (sm/hr/iv/v2020_06_15 trees). All REST, OAuth2. No WebSocket channels.
+  - url: https://accounts.secure.freee.co.jp/public_api/authorize
+    type: Authentication
+    note: OAuth 2.0 authorization endpoint (authorization code grant).
+  - url: https://github.com/freee
+    type: SourceCode
+    note: freee GitHub organization hosting official SDKs (PHP, Java, etc.) generated from the OpenAPI schemas.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or other server-push protocol surface exists on any freee
+    public API; all documented freee APIs are request/response REST over HTTPS
+    authenticated with OAuth 2.0. No AsyncAPI document was created because there
+    is no event-driven transport on freee's own API to model.

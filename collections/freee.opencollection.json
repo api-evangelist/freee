@@ -1,0 +1,274 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "freee API (Accounting and HR/Payroll)",
+    "version": "2026-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "token": "{{accessToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Companies", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List companies.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.freee.co.jp/api/1/companies" },
+          "docs": "Lists the freee companies (事業所) the authenticated user belongs to."
+        },
+        {
+          "info": { "name": "Get a company.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/companies/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The company ID." } ]
+          },
+          "docs": "Retrieves details, account items, taxes, and settings for one company."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Deals", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List deals.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/deals?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company (事業所) ID." } ]
+          },
+          "docs": "Lists accounting deals / transactions (取引) for a company."
+        },
+        {
+          "info": { "name": "Create a deal.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/api/1/deals",
+            "body": { "type": "json", "data": "{\n  \"company_id\": 0,\n  \"issue_date\": \"2026-07-12\",\n  \"type\": \"expense\",\n  \"details\": [\n    { \"account_item_id\": 0, \"tax_code\": 0, \"amount\": 1000 }\n  ]\n}" }
+          },
+          "docs": "Creates a new accounting deal (取引)."
+        },
+        {
+          "info": { "name": "Get a deal.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/deals/:id?company_id={{companyId}}",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The deal ID." },
+              { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." }
+            ]
+          },
+          "docs": "Retrieves a deal by ID."
+        },
+        {
+          "info": { "name": "Update a deal.", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.freee.co.jp/api/1/deals/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The deal ID." } ],
+            "body": { "type": "json", "data": "{\n  \"company_id\": 0,\n  \"issue_date\": \"2026-07-12\",\n  \"type\": \"expense\",\n  \"details\": []\n}" }
+          },
+          "docs": "Updates an existing deal."
+        },
+        {
+          "info": { "name": "Delete a deal.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.freee.co.jp/api/1/deals/:id?company_id={{companyId}}",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The deal ID." },
+              { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." }
+            ]
+          },
+          "docs": "Deletes a deal."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Account Items", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List account items.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/account_items?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." } ]
+          },
+          "docs": "Lists the account items / chart of accounts (勘定科目) for a company."
+        },
+        {
+          "info": { "name": "Create an account item.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/api/1/account_items",
+            "body": { "type": "json", "data": "{\n  \"company_id\": 0,\n  \"name\": \"新しい勘定科目\"\n}" }
+          },
+          "docs": "Creates a new account item."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Partners", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List partners.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/partners?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." } ]
+          },
+          "docs": "Lists trading partners / counterparties (取引先) for a company."
+        },
+        {
+          "info": { "name": "Create a partner.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/api/1/partners",
+            "body": { "type": "json", "data": "{\n  \"company_id\": 0,\n  \"name\": \"新しい取引先\"\n}" }
+          },
+          "docs": "Creates a new partner."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Invoices", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List invoices.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/invoices?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." } ]
+          },
+          "docs": "Lists issued invoices (請求書) for a company."
+        },
+        {
+          "info": { "name": "List quotations.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/quotations?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." } ]
+          },
+          "docs": "Lists issued quotations / estimates (見積書) for a company."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Wallet Transactions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List wallet transactions.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/wallet_txns?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." } ]
+          },
+          "docs": "Lists wallet transactions / statement lines (明細) for a company."
+        },
+        {
+          "info": { "name": "List walletables.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/walletables?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." } ]
+          },
+          "docs": "Lists walletables (口座) - bank accounts, credit cards, and wallets - for a company."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Journals and Reports", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Request a journals export.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/journals?company_id={{companyId}}&download_type=csv",
+            "params": [
+              { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." },
+              { "name": "download_type", "value": "csv", "type": "query", "description": "Export format (csv, pdf, yayoi, generic_v2)." }
+            ]
+          },
+          "docs": "Starts an asynchronous export of journals (仕訳帳) for a company."
+        },
+        {
+          "info": { "name": "Get P&L trial balance.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/reports/trial_pl?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The company ID." } ]
+          },
+          "docs": "Returns the profit-and-loss trial balance (試算表・損益計算書) for a company."
+        }
+      ]
+    },
+    {
+      "info": { "name": "HR - Employees", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get current HR user.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.freee.co.jp/hr/api/v1/users/me" },
+          "docs": "Returns the authenticated user and the HR companies they can access."
+        },
+        {
+          "info": { "name": "List employees.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/hr/api/v1/employees?company_id={{companyId}}",
+            "params": [ { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The HR company ID." } ]
+          },
+          "docs": "Lists employees (従業員) for an HR company and month."
+        }
+      ]
+    },
+    {
+      "info": { "name": "HR - Payroll", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List employee payroll statements.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/hr/api/v1/salaries/employee_payroll_statements?company_id={{companyId}}&year=2026&month=7",
+            "params": [
+              { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The HR company ID." },
+              { "name": "year", "value": "2026", "type": "query", "description": "Pay year." },
+              { "name": "month", "value": "7", "type": "query", "description": "Pay month." }
+            ]
+          },
+          "docs": "Lists employee salary payroll statements (給与明細) for a company and pay month."
+        }
+      ]
+    },
+    {
+      "info": { "name": "HR - Attendance", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List time clocks.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/hr/api/v1/employees/:employee_id/time_clocks?company_id={{companyId}}",
+            "params": [
+              { "name": "employee_id", "value": "", "type": "path", "description": "The employee ID." },
+              { "name": "company_id", "value": "{{companyId}}", "type": "query", "description": "The HR company ID." }
+            ]
+          },
+          "docs": "Lists an employee's time-clock punches (打刻)."
+        },
+        {
+          "info": { "name": "Register a time clock.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/hr/api/v1/employees/:employee_id/time_clocks",
+            "params": [ { "name": "employee_id", "value": "", "type": "path", "description": "The employee ID." } ],
+            "body": { "type": "json", "data": "{\n  \"company_id\": 0,\n  \"type\": \"clock_in\"\n}" }
+          },
+          "docs": "Registers a time-clock punch (clock in / out / break) for an employee."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

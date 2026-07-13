@@ -1,0 +1,238 @@
+aid: freee
+url: https://raw.githubusercontent.com/api-evangelist/freee/refs/heads/main/apis.yml
+name: freee
+kind: company
+description: freee K.K. (freee株式会社) is a Japanese cloud business-management SaaS
+  company. Its core products are freee Accounting (会計freee) - cloud accounting and
+  bookkeeping - and freee HR & Payroll (人事労務freee) - HR, attendance, and payroll -
+  plus invoicing (freee請求書) and sales management. freee exposes well-documented
+  public REST APIs for both accounting and HR, authenticated with OAuth 2.0
+  (authorization code). Accounting endpoints live under
+  https://api.freee.co.jp/api/1 and HR / payroll endpoints under
+  https://api.freee.co.jp/hr/api/v1, and freee publishes machine-readable OpenAPI
+  schemas for its platform.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Accounting
+- Bookkeeping
+- HR
+- Payroll
+- Invoicing
+- Finance
+- SaaS
+- Japan
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: freee:freee-accounting-deals-api
+  name: freee Accounting Deals API
+  tags:
+  - Accounting
+  - Deals
+  - Transactions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/accounting/reference
+  baseURL: https://api.freee.co.jp/api/1
+  properties:
+  - url: https://developer.freee.co.jp/
+    type: Documentation
+  - url: https://developer.freee.co.jp/reference/accounting/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Create, list, get, update, and delete accounting deals / transactions
+    (取引) - income and expense records with account-item detail lines, tax codes,
+    partners, and settlement status - scoped to a freee company.
+- aid: freee:freee-accounting-account-items-api
+  name: freee Accounting Account Items API
+  tags:
+  - Accounting
+  - Account Items
+  - Chart of Accounts
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/accounting/reference
+  baseURL: https://api.freee.co.jp/api/1
+  properties:
+  - url: https://developer.freee.co.jp/reference/accounting/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Manage a company's account items / chart of accounts (勘定科目) and
+    related tax codes (税区分) that classify each line of a deal or journal.
+- aid: freee:freee-accounting-partners-api
+  name: freee Accounting Partners API
+  tags:
+  - Accounting
+  - Partners
+  - Counterparties
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/accounting/reference
+  baseURL: https://api.freee.co.jp/api/1
+  properties:
+  - url: https://developer.freee.co.jp/reference/accounting/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Create, list, get, update, and delete trading partners / counterparties
+    (取引先) - the customers and suppliers referenced by deals, invoices, and
+    payments.
+- aid: freee:freee-accounting-invoices-api
+  name: freee Accounting Invoices and Quotations API
+  tags:
+  - Accounting
+  - Invoicing
+  - Quotations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/accounting/reference
+  baseURL: https://api.freee.co.jp/api/1
+  properties:
+  - url: https://developer.freee.co.jp/reference/accounting/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Read issued invoices (請求書) and quotations / estimates (見積書) for a
+    company, including invoice number, issue date, partner, totals, and lifecycle
+    status.
+- aid: freee:freee-accounting-wallet-txns-api
+  name: freee Accounting Wallet Transactions API
+  tags:
+  - Accounting
+  - Wallet Transactions
+  - Bank Accounts
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/accounting/reference
+  baseURL: https://api.freee.co.jp/api/1
+  properties:
+  - url: https://developer.freee.co.jp/reference/accounting/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Manage wallet transactions / statement lines (明細) and the walletables
+    (口座) they belong to - bank accounts, credit cards, and wallets - for bank
+    reconciliation and cash-flow tracking.
+- aid: freee:freee-accounting-journals-reports-api
+  name: freee Accounting Journals and Reports API
+  tags:
+  - Accounting
+  - Journals
+  - Reports
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/accounting/reference
+  baseURL: https://api.freee.co.jp/api/1
+  properties:
+  - url: https://developer.freee.co.jp/reference/accounting/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Request asynchronous journal (仕訳帳) exports (CSV / PDF / yayoi), manage
+    manual journals (振替伝票), and read trial-balance reports such as the
+    profit-and-loss trial balance (試算表).
+- aid: freee:freee-hr-employees-api
+  name: freee HR Employees API
+  tags:
+  - HR
+  - Employees
+  - Japan
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/hr/reference
+  baseURL: https://api.freee.co.jp/hr/api/v1
+  properties:
+  - url: https://developer.freee.co.jp/reference/hr/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Create, list, get, update, and delete employees (従業員) in freee人事労務,
+    plus the authenticated HR user context and the companies (事業所) they can
+    access.
+- aid: freee:freee-hr-payroll-api
+  name: freee HR Payroll API
+  tags:
+  - HR
+  - Payroll
+  - Salary
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/hr/reference
+  baseURL: https://api.freee.co.jp/hr/api/v1
+  properties:
+  - url: https://developer.freee.co.jp/reference/hr/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Read employee salary and bonus payroll statements (給与明細・賞与明細) by
+    company and pay month for downstream payroll, accounting, and reporting
+    workflows.
+- aid: freee:freee-hr-attendance-api
+  name: freee HR Attendance API
+  tags:
+  - HR
+  - Attendance
+  - Time Tracking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.freee.co.jp/reference/hr/reference
+  baseURL: https://api.freee.co.jp/hr/api/v1
+  properties:
+  - url: https://developer.freee.co.jp/reference/hr/reference
+    type: APIReference
+  - url: openapi/freee-openapi.yml
+    type: OpenAPI
+  - url: collections/freee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/freee.opencollection.json
+    type: OpenCollection
+  description: Register time-clock punches (打刻) and read or edit daily attendance
+    work records (勤怠) for employees - clock in / out, breaks, and worked hours.
+common:
+- type: DomainSecurity
+  url: security/freee-domain-security.yml
+- type: Authentication
+  url: authentication/freee-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/freee
+- type: LinkedIn
+  url: https://www.linkedin.com/company/freeekk
+- type: Website
+  url: https://www.freee.co.jp/
+- type: Documentation
+  url: https://developer.freee.co.jp/
+- type: Plans
+  url: plans/freee-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/freee-rate-limits.yml
+- type: FinOps
+  url: finops/freee-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

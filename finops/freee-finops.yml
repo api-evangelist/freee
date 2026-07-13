@@ -1,0 +1,100 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: freee
+providerId: freee
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Accounting
+- HR
+- Payroll
+- SaaS
+- Japan
+- FinOps
+- Cost Management
+description: >-
+  FinOps view of freee spend. freee is subscription SaaS billed in Japanese yen
+  (JPY), tax-excluded. freee Accounting corporate plans are billed per company
+  per month with usage-based charges (従量課金) layered on; freee HR & Payroll plans
+  include a base headcount and then bill per additional employee (per-user) per
+  month. Annual billing is discounted versus monthly. The public REST API is
+  included with a paid subscription - there is no separate metered API charge -
+  so API-driven integrations do not add a distinct line item; they consume the
+  same subscription entitlement. Cost is therefore driven by product mix
+  (accounting vs HR/payroll), plan tier, company count, and employee headcount.
+notes: >-
+  Per-unit rates and usage-based (従量課金) charges are not reconciled here; confirm
+  current list prices, employee add-on rates, and any overage on the freee
+  pricing pages. Amounts are tax-excluded JPY.
+sources:
+- https://www.freee.co.jp/pricing/
+- https://www.freee.co.jp/accounting/small-medium/pricing/
+- https://developer.freee.co.jp/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: freee K.K.
+serviceCategory: Business Applications
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: JPY
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: freee (Accounting and HR/Payroll)
+  ServiceCategory: Business Applications
+  ProviderName: freee K.K.
+  PublisherName: freee K.K.
+  InvoiceIssuerName: freee K.K.
+  BillingCurrency: JPY
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: accounting_subscription
+  description: freee Accounting base subscription, billed per company per month (tax-excluded JPY).
+  unit: company-months
+  aggregation: sum
+  dimensions:
+  - company
+  - plan
+- name: accounting_usage_charges
+  description: Usage-based charges (従量課金) layered on some accounting plans; not reconciled here.
+  unit: charges
+  aggregation: sum
+  dimensions:
+  - company
+  - plan
+- name: hr_subscription
+  description: freee HR & Payroll base subscription, billed per company per month with a base headcount.
+  unit: company-months
+  aggregation: sum
+  dimensions:
+  - company
+  - plan
+- name: hr_additional_employees
+  description: Additional employees beyond the base headcount, billed per employee per month.
+  unit: employee-months
+  aggregation: sum
+  dimensions:
+  - company
+  - plan
+principles:
+- name: Visibility
+  description: Track each freee product subscription, plan tier, company count, and billed employee headcount; API usage is included and does not meter separately.
+- name: Allocation
+  description: Map each freee company (事業所) and product subscription to the internal entity or cost center it serves.
+- name: Optimization
+  description: Right-size plan tiers to the features actually used, prefer annual billing over monthly, and review billed employee headcount to avoid paying for inactive employees.
+- name: Accountability
+  description: Assign an owner per freee subscription; review monthly JPY spend and any usage-based charges against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

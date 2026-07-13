@@ -1,0 +1,184 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: freee
+providerId: freee
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Accounting
+- HR
+- Payroll
+- Plans
+- SaaS
+- Japan
+description: >-
+  freee is sold as per-company / per-user monthly SaaS subscriptions in Japanese
+  yen (JPY), tax-excluded, with usage-based charges (従量課金) applied on top of the
+  base plan for some products and higher volumes. Pricing differs by product
+  (freee Accounting vs freee HR & Payroll) and by whether the customer is an
+  individual (個人) or a corporation (法人). The public REST API is included with a
+  paid freee subscription at no separate API fee - what a token can read and write
+  is governed by the underlying plan's feature set, not by a distinct API price.
+  The figures below are the published corporate (法人) list rates at review time
+  and are NOT reconciled; verify current tiers, employee add-on rates, and
+  usage-based charges on the freee pricing pages.
+notes: >-
+  Accounting corporate plans are billed per company with usage-based charges
+  layered on; HR & Payroll plans include a base number of employees and then bill
+  per additional employee (per-user) per month. Annual (年払い) billing is cheaper
+  than monthly (月払い). All amounts are tax-excluded JPY. Advance (アドバンス) and
+  Enterprise (エンタープライズ) tiers exist for both products with rates by quote.
+currency: JPY
+sources:
+- https://www.freee.co.jp/pricing/
+- https://www.freee.co.jp/accounting/small-medium/pricing/
+- https://support.freee.co.jp/hc/ja/articles/203309710
+plans:
+- id: freee-accounting-starter
+  name: freee Accounting - Starter (会計freee スターター 法人)
+  type: paid
+  description: >-
+    Entry corporate accounting plan: cloud bookkeeping, bank/credit-card
+    auto-import, deals, invoicing, and reports. Usage-based charges apply on top.
+    Includes REST API access.
+  entries:
+  - label: Base Subscription (annual billing)
+    name: accounting_starter
+    type: flat
+    metric: company
+    limit: -1
+    timeFrame: month
+    geo: japan
+    unit: 1
+    price: '5480'
+    currency: JPY
+    userMultiplied: false
+    notes: Tax-excluded JPY per company per month on annual billing (about 7,280/month on monthly billing). Usage-based charges (従量課金) apply separately.
+  elements:
+  - name: Cloud Accounting and Bookkeeping
+  - name: Bank and Credit-Card Auto-Import
+  - name: Invoicing
+  - name: REST API Access
+- id: freee-accounting-standard
+  name: freee Accounting - Standard (会計freee スタンダード 法人)
+  type: paid
+  description: >-
+    Mid corporate accounting plan adding expense workflows, deeper reporting, and
+    higher limits. Usage-based charges apply on top. Includes REST API access.
+  entries:
+  - label: Base Subscription (annual billing)
+    name: accounting_standard
+    type: flat
+    metric: company
+    limit: -1
+    timeFrame: month
+    geo: japan
+    unit: 1
+    price: '8980'
+    currency: JPY
+    userMultiplied: false
+    notes: Tax-excluded JPY per company per month on annual billing. Usage-based charges (従量課金) apply separately.
+  elements:
+  - name: Everything in Starter
+  - name: Expense and Approval Workflows
+  - name: Advanced Reports
+  - name: REST API Access
+- id: freee-accounting-advance-enterprise
+  name: freee Accounting - Advance / Enterprise (アドバンス / エンタープライズ)
+  type: enterprise
+  description: >-
+    Higher corporate tiers for larger organizations with advanced governance,
+    consolidated needs, and support. Pricing by quote.
+  entries:
+  - label: Enterprise Agreement
+    name: accounting_enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: japan
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Advanced Governance
+  - name: Priority Support
+  - name: REST API Access
+- id: freee-hr-starter
+  name: freee HR & Payroll - Starter (人事労務freee スターター)
+  type: paid
+  description: >-
+    Entry HR/payroll plan covering employee records, attendance, and payroll for
+    a small headcount, then billed per additional employee. Includes REST API
+    access.
+  entries:
+  - label: Base Subscription (annual billing, up to 5 employees)
+    name: hr_starter_base
+    type: flat
+    metric: company
+    limit: -1
+    timeFrame: month
+    geo: japan
+    unit: 1
+    price: '3000'
+    currency: JPY
+    userMultiplied: false
+    notes: Tax-excluded JPY per month on annual billing, covering up to 5 employees (about 3,900/month on monthly billing).
+  - label: Additional Employee (from 6th)
+    name: hr_starter_per_employee
+    type: usage
+    metric: employee
+    limit: -1
+    timeFrame: month
+    geo: japan
+    unit: 1
+    price: '600'
+    currency: JPY
+    userMultiplied: true
+    notes: Tax-excluded JPY per additional employee per month beyond the included 5.
+  elements:
+  - name: Employee Records
+  - name: Attendance and Time Clocks
+  - name: Payroll
+  - name: REST API Access
+- id: freee-hr-standard
+  name: freee HR & Payroll - Standard (人事労務freee スタンダード)
+  type: paid
+  description: >-
+    Mid HR/payroll plan adding workflows and deeper labor-management features,
+    then billed per additional employee. Includes REST API access.
+  entries:
+  - label: Base Subscription (annual billing, up to 5 employees)
+    name: hr_standard_base
+    type: flat
+    metric: company
+    limit: -1
+    timeFrame: month
+    geo: japan
+    unit: 1
+    price: '5500'
+    currency: JPY
+    userMultiplied: false
+    notes: Tax-excluded JPY per month on annual billing, covering up to 5 employees (about 7,150/month on monthly billing).
+  - label: Additional Employee (from 6th)
+    name: hr_standard_per_employee
+    type: usage
+    metric: employee
+    limit: -1
+    timeFrame: month
+    geo: japan
+    unit: 1
+    price: '1100'
+    currency: JPY
+    userMultiplied: true
+    notes: Tax-excluded JPY per additional employee per month beyond the included 5.
+  elements:
+  - name: Everything in Starter
+  - name: HR Workflows
+  - name: Advanced Labor Management
+  - name: REST API Access
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

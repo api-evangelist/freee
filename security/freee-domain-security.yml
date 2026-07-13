@@ -1,0 +1,37 @@
+generated: '2026-07-12'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.freee.co.jp
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GlobalSign nv-sa (GlobalSign GCC R6 AlphaSSL CA 2025)
+  cert_expires: Mar 20 05:19:20 2027 GMT
+  hsts: true
+  hsts_max_age: 15768000
+- host: api.freee.co.jp
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: Amazon (Amazon RSA 2048 M04)
+  cert_expires: Nov  5 23:59:59 2026 GMT
+  hsts: false
+- host: accounts.secure.freee.co.jp
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: Amazon (Amazon RSA 2048 M04)
+  cert_expires: Feb  7 23:59:59 2027 GMT
+  hsts: false
+- host: developer.freee.co.jp
+  https: true
+  hsts: false
+  note: Developer documentation portal; HTTPS reachable, HSTS header not observed.
+domains:
+- domain: freee.co.jp
+  dnssec: false
+  caa: []
+  spf: true
+  spf_policy: "~all (softfail); includes _spf.google.com, amazonses.com, mktomail.com, salesforce/pardot, hubspot"
+  dmarc: true
+  dmarc_policy: quarantine
+  dmarc_pct: 100
+  dmarc_rua: mailto:psirt@freee.co.jp
