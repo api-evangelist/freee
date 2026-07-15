@@ -215,6 +215,8 @@ apis:
   description: Register time-clock punches (打刻) and read or edit daily attendance
     work records (勤怠) for employees - clock in / out, breaks, and worked hours.
 common:
+- type: AgenticAccess
+  url: agentic-access/freee-agentic-access.yml
 - type: DomainSecurity
   url: security/freee-domain-security.yml
 - type: Authentication
