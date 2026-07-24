@@ -1,0 +1,333 @@
+openapi: 3.0.3
+info:
+  title: freee API (Accounting and HR/Payroll) Account Items Deals API
+  description: 'A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee). freee is a Japanese cloud accounting, invoicing, and HR / payroll SaaS. Accounting endpoints live under https://api.freee.co.jp/api/1 and HR / payroll endpoints under https://api.freee.co.jp/hr/api/v1. All requests are authenticated with an OAuth 2.0 (authorization code) access token sent as `Authorization: Bearer <access_token>`. Most reads and writes are scoped to a freee company via the `company_id` parameter. This document is grounded in freee''s own OpenAPI schemas (github.com/freee/freee-api-schema) but is a curated subset - it does not reproduce every operation, field, or response of the freee platform. See the official reference for the complete surface.'
+  version: '2026-02-01'
+  contact:
+    name: freee Developers Community
+    url: https://developer.freee.co.jp/
+  license:
+    name: © Since 2013 freee K.K.
+    url: https://app.secure.freee.co.jp/developers/terms
+servers:
+- url: https://api.freee.co.jp
+  description: freee production API host (accounting under /api/1, HR under /hr/api/v1)
+security:
+- oauth2:
+  - read
+  - write
+tags:
+- name: Deals
+  description: Accounting deals / transactions (取引) - income and expense records.
+paths:
+  /api/1/deals:
+    get:
+      operationId: getDeals
+      tags:
+      - Deals
+      summary: List deals
+      description: Lists accounting deals / transactions (取引) for a company. A deal is an income (収入) or expense (支出) record with one or more detail lines.
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdQueryRequired'
+      - name: partner_id
+        in: query
+        schema:
+          type: integer
+      - name: account_item_id
+        in: query
+        schema:
+          type: integer
+      - name: status
+        in: query
+        description: Settlement status.
+        schema:
+          type: string
+          enum:
+          - unsettled
+          - settled
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - income
+          - expense
+      - name: start_issue_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: end_issue_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A list of deals.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deals:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Deal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createDeal
+      tags:
+      - Deals
+      summary: Create a deal
+      description: Creates a new accounting deal (取引).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealCreateParams'
+      responses:
+        '201':
+          description: The created deal.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deal:
+                    $ref: '#/components/schemas/Deal'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/1/deals/{id}:
+    parameters:
+    - $ref: '#/components/parameters/PathId'
+    get:
+      operationId: getDeal
+      tags:
+      - Deals
+      summary: Get a deal
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdQueryRequired'
+      responses:
+        '200':
+          description: The requested deal.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deal:
+                    $ref: '#/components/schemas/Deal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateDeal
+      tags:
+      - Deals
+      summary: Update a deal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealCreateParams'
+      responses:
+        '200':
+          description: The updated deal.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deal:
+                    $ref: '#/components/schemas/Deal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteDeal
+      tags:
+      - Deals
+      summary: Delete a deal
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdQueryRequired'
+      responses:
+        '204':
+          description: The deal was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    DealDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_item_id:
+          type: integer
+        tax_code:
+          type: integer
+        amount:
+          type: integer
+        vat:
+          type: integer
+        description:
+          type: string
+    Error:
+      type: object
+      properties:
+        status_code:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              messages:
+                type: array
+                items:
+                  type: string
+    Deal:
+      type: object
+      properties:
+        id:
+          type: integer
+        company_id:
+          type: integer
+        issue_date:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        amount:
+          type: integer
+        due_amount:
+          type: integer
+        type:
+          type: string
+          enum:
+          - income
+          - expense
+        partner_id:
+          type: integer
+        status:
+          type: string
+          enum:
+          - unsettled
+          - settled
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/DealDetail'
+    DealCreateParams:
+      type: object
+      required:
+      - company_id
+      - issue_date
+      - type
+      - details
+      properties:
+        company_id:
+          type: integer
+        issue_date:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        type:
+          type: string
+          enum:
+          - income
+          - expense
+        partner_id:
+          type: integer
+        details:
+          type: array
+          items:
+            type: object
+            required:
+            - account_item_id
+            - tax_code
+            - amount
+            properties:
+              account_item_id:
+                type: integer
+              tax_code:
+                type: integer
+              amount:
+                type: integer
+              description:
+                type: string
+  parameters:
+    CompanyIdQueryRequired:
+      name: company_id
+      in: query
+      required: true
+      description: The freee company (事業所) ID the request is scoped to.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The numeric identifier of the resource.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: 'freee unified OAuth 2.0. Obtain an access token via the authorization code grant and send it as `Authorization: Bearer <access_token>` on every request. The same token works across freee products (accounting, HR/payroll, invoicing) subject to the granted scopes.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.secure.freee.co.jp/public_api/authorize
+          tokenUrl: https://accounts.secure.freee.co.jp/public_api/token
+          scopes:
+            read: データの読み取り (read data)
+            write: データの書き込み (write data)

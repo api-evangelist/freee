@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: freee API (Accounting and HR/Payroll) Account Items Attendance API
+  description: 'A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee). freee is a Japanese cloud accounting, invoicing, and HR / payroll SaaS. Accounting endpoints live under https://api.freee.co.jp/api/1 and HR / payroll endpoints under https://api.freee.co.jp/hr/api/v1. All requests are authenticated with an OAuth 2.0 (authorization code) access token sent as `Authorization: Bearer <access_token>`. Most reads and writes are scoped to a freee company via the `company_id` parameter. This document is grounded in freee''s own OpenAPI schemas (github.com/freee/freee-api-schema) but is a curated subset - it does not reproduce every operation, field, or response of the freee platform. See the official reference for the complete surface.'
+  version: '2026-02-01'
+  contact:
+    name: freee Developers Community
+    url: https://developer.freee.co.jp/
+  license:
+    name: © Since 2013 freee K.K.
+    url: https://app.secure.freee.co.jp/developers/terms
+servers:
+- url: https://api.freee.co.jp
+  description: freee production API host (accounting under /api/1, HR under /hr/api/v1)
+security:
+- oauth2:
+  - read
+  - write
+tags:
+- name: Attendance
+  description: Time clocks (打刻) and work records (勤怠).
+paths:
+  /hr/api/v1/employees/{employee_id}/time_clocks:
+    parameters:
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: getTimeClocks
+      tags:
+      - Attendance
+      summary: List time clocks
+      description: Lists an employee's time-clock punches (打刻).
+      parameters:
+      - name: company_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: from_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: to_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: A list of time clocks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeClock'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createTimeClock
+      tags:
+      - Attendance
+      summary: Register a time clock
+      description: Registers a time-clock punch (clock in / out / break) for an employee.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - company_id
+              - type
+              properties:
+                company_id:
+                  type: integer
+                type:
+                  type: string
+                  enum:
+                  - clock_in
+                  - break_begin
+                  - break_end
+                  - clock_out
+                datetime:
+                  type: string
+                base_date:
+                  type: string
+                  format: date
+      responses:
+        '201':
+          description: The registered time clock.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeClock'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /hr/api/v1/employees/{employee_id}/work_records/{date}:
+    parameters:
+    - name: employee_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: date
+      in: path
+      required: true
+      schema:
+        type: string
+        format: date
+    get:
+      operationId: getWorkRecord
+      tags:
+      - Attendance
+      summary: Get a work record
+      description: Returns an employee's attendance work record (勤怠) for a single day.
+      parameters:
+      - name: company_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The work record for the day.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateWorkRecord
+      tags:
+      - Attendance
+      summary: Update a work record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_id:
+                  type: integer
+                clock_in_at:
+                  type: string
+                clock_out_at:
+                  type: string
+      responses:
+        '200':
+          description: The updated work record.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteWorkRecord
+      tags:
+      - Attendance
+      summary: Delete a work record
+      parameters:
+      - name: company_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: The work record was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        status_code:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              messages:
+                type: array
+                items:
+                  type: string
+    TimeClock:
+      type: object
+      properties:
+        id:
+          type: integer
+        date:
+          type: string
+          format: date
+        type:
+          type: string
+          enum:
+          - clock_in
+          - break_begin
+          - break_end
+          - clock_out
+        datetime:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: 'freee unified OAuth 2.0. Obtain an access token via the authorization code grant and send it as `Authorization: Bearer <access_token>` on every request. The same token works across freee products (accounting, HR/payroll, invoicing) subject to the granted scopes.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.secure.freee.co.jp/public_api/authorize
+          tokenUrl: https://accounts.secure.freee.co.jp/public_api/token
+          scopes:
+            read: データの読み取り (read data)
+            write: データの書き込み (write data)

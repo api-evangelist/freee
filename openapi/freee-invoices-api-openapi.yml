@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: freee API (Accounting and HR/Payroll) Account Items Invoices API
+  description: 'A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee). freee is a Japanese cloud accounting, invoicing, and HR / payroll SaaS. Accounting endpoints live under https://api.freee.co.jp/api/1 and HR / payroll endpoints under https://api.freee.co.jp/hr/api/v1. All requests are authenticated with an OAuth 2.0 (authorization code) access token sent as `Authorization: Bearer <access_token>`. Most reads and writes are scoped to a freee company via the `company_id` parameter. This document is grounded in freee''s own OpenAPI schemas (github.com/freee/freee-api-schema) but is a curated subset - it does not reproduce every operation, field, or response of the freee platform. See the official reference for the complete surface.'
+  version: '2026-02-01'
+  contact:
+    name: freee Developers Community
+    url: https://developer.freee.co.jp/
+  license:
+    name: © Since 2013 freee K.K.
+    url: https://app.secure.freee.co.jp/developers/terms
+servers:
+- url: https://api.freee.co.jp
+  description: freee production API host (accounting under /api/1, HR under /hr/api/v1)
+security:
+- oauth2:
+  - read
+  - write
+tags:
+- name: Invoices
+  description: Issued invoices and quotations (請求書・見積書).
+paths:
+  /api/1/invoices:
+    get:
+      operationId: getInvoices
+      tags:
+      - Invoices
+      summary: List invoices
+      description: Lists issued invoices (請求書) for a company.
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdQueryRequired'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A list of invoices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/1/invoices/{id}:
+    parameters:
+    - $ref: '#/components/parameters/PathId'
+    get:
+      operationId: getInvoice
+      tags:
+      - Invoices
+      summary: Get an invoice
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdQueryRequired'
+      responses:
+        '200':
+          description: The requested invoice.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoice:
+                    $ref: '#/components/schemas/Invoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/1/quotations:
+    get:
+      operationId: getQuotations
+      tags:
+      - Invoices
+      summary: List quotations
+      description: Lists issued quotations / estimates (見積書) for a company.
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdQueryRequired'
+      responses:
+        '200':
+          description: A list of quotations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quotations:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        status_code:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              messages:
+                type: array
+                items:
+                  type: string
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+        company_id:
+          type: integer
+        invoice_number:
+          type: string
+        issue_date:
+          type: string
+          format: date
+        partner_id:
+          type: integer
+        total_amount:
+          type: integer
+        invoice_status:
+          type: string
+          description: Invoice lifecycle status (draft, applying, approved, submitted, unsubmitted).
+  parameters:
+    CompanyIdQueryRequired:
+      name: company_id
+      in: query
+      required: true
+      description: The freee company (事業所) ID the request is scoped to.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The numeric identifier of the resource.
+      schema:
+        type: integer
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: 'freee unified OAuth 2.0. Obtain an access token via the authorization code grant and send it as `Authorization: Bearer <access_token>` on every request. The same token works across freee products (accounting, HR/payroll, invoicing) subject to the granted scopes.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.secure.freee.co.jp/public_api/authorize
+          tokenUrl: https://accounts.secure.freee.co.jp/public_api/token
+          scopes:
+            read: データの読み取り (read data)
+            write: データの書き込み (write data)
