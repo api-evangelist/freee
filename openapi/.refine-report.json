@@ -1,0 +1,36 @@
+{
+  "provider": "freee",
+  "sources": [
+    "freee-account-items-api-openapi.yml",
+    "freee-attendance-api-openapi.yml",
+    "freee-companies-api-openapi.yml",
+    "freee-deals-api-openapi.yml",
+    "freee-employees-api-openapi.yml",
+    "freee-hr-users-api-openapi.yml",
+    "freee-invoices-api-openapi.yml",
+    "freee-journals-api-openapi.yml",
+    "freee-partners-api-openapi.yml",
+    "freee-payroll-api-openapi.yml",
+    "freee-taxes-api-openapi.yml",
+    "freee-wallet-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "freee-account-items-api-openapi.yml",
+    "freee-attendance-api-openapi.yml",
+    "freee-companies-api-openapi.yml",
+    "freee-deals-api-openapi.yml",
+    "freee-employees-api-openapi.yml",
+    "freee-hr-users-api-openapi.yml",
+    "freee-invoices-api-openapi.yml",
+    "freee-journals-api-openapi.yml",
+    "freee-partners-api-openapi.yml",
+    "freee-payroll-api-openapi.yml",
+    "freee-taxes-api-openapi.yml",
+    "freee-wallet-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
