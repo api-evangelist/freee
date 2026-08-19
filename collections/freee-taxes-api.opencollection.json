@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "freee API (Accounting and HR/Payroll) Account Items Taxes API",
+    "version": "2026-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.secure.freee.co.jp/public_api/authorize",
+      "accessTokenUrl": "https://accounts.secure.freee.co.jp/public_api/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Taxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tax codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/taxes/codes"
+          },
+          "docs": "Lists the tax codes / tax classifications (税区分) available in freee."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

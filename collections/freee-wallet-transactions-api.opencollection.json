@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "freee API (Accounting and HR/Payroll) Account Items Wallet Transactions API",
+    "version": "2026-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.secure.freee.co.jp/public_api/authorize",
+      "accessTokenUrl": "https://accounts.secure.freee.co.jp/public_api/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wallet Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List wallet transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/wallet_txns",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              },
+              {
+                "name": "walletable_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists wallet transactions / statement lines (明細) for a company."
+        },
+        {
+          "info": {
+            "name": "Create a wallet transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/api/1/wallet_txns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a wallet transaction"
+        },
+        {
+          "info": {
+            "name": "Get a wallet transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/wallet_txns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Get a wallet transaction"
+        },
+        {
+          "info": {
+            "name": "Delete a wallet transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.freee.co.jp/api/1/wallet_txns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Delete a wallet transaction"
+        },
+        {
+          "info": {
+            "name": "List walletables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/walletables",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists walletables (口座) - bank accounts, credit cards, and wallets - for a company."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

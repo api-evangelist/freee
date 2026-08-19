@@ -1,0 +1,178 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "freee API (Accounting and HR/Payroll) Account Items Deals API",
+    "version": "2026-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.secure.freee.co.jp/public_api/authorize",
+      "accessTokenUrl": "https://accounts.secure.freee.co.jp/public_api/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/deals",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              },
+              {
+                "name": "partner_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_item_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Settlement status."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_issue_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_issue_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists accounting deals / transactions (取引) for a company. A deal is an income (収入) or expense (支出) record with one or more detail lines."
+        },
+        {
+          "info": {
+            "name": "Create a deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/api/1/deals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new accounting deal (取引)."
+        },
+        {
+          "info": {
+            "name": "Get a deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/deals/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Get a deal"
+        },
+        {
+          "info": {
+            "name": "Update a deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.freee.co.jp/api/1/deals/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a deal"
+        },
+        {
+          "info": {
+            "name": "Delete a deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.freee.co.jp/api/1/deals/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Delete a deal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,186 @@
+{
+  "item": [
+    {
+      "id": "6f93531a-26bb-4d3f-a37c-97b4b7178b12",
+      "name": "HR Users",
+      "description": {
+        "content": "Authenticated HR user context.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f1e4770-55c0-44e9-94c9-251684797014",
+          "name": "Get current HR user",
+          "request": {
+            "name": "Get current HR user",
+            "description": {
+              "content": "Returns the authenticated user and the HR companies (事業所) they can access in freee人事労務.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hr",
+                "api",
+                "v1",
+                "users",
+                "me"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8d698e5-453e-4ea7-9032-196d6b5b5c63",
+              "name": "The current HR user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hr",
+                    "api",
+                    "v1",
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": \"string\",\n  \"key_1\": true,\n  \"key_2\": 8863,\n  \"key_3\": 9961.278217418632\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d051fd0d-7dd3-40aa-8078-0109c9e42fe4",
+              "name": "Missing or invalid OAuth 2.0 Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hr",
+                    "api",
+                    "v1",
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 2002,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.freee.co.jp",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "read write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://accounts.secure.freee.co.jp/public_api/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.secure.freee.co.jp/public_api/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9975aeee-f9b2-45f7-b8d5-a425ad4ed590",
+    "name": "freee API (Accounting and HR/Payroll) Account Items HR Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee). freee is a Japanese cloud accounting, invoicing, and HR / payroll SaaS. Accounting endpoints live under https://api.freee.co.jp/api/1 and HR / payroll endpoints under https://api.freee.co.jp/hr/api/v1. All requests are authenticated with an OAuth 2.0 (authorization code) access token sent as `Authorization: Bearer <access_token>`. Most reads and writes are scoped to a freee company via the `company_id` parameter. This document is grounded in freee's own OpenAPI schemas (github.com/freee/freee-api-schema) but is a curated subset - it does not reproduce every operation, field, or response of the freee platform. See the official reference for the complete surface.\n\nContact Support:\n Name: freee Developers Community",
+      "type": "text/plain"
+    }
+  }
+}

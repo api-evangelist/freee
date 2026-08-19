@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "freee API (Accounting and HR/Payroll) Account Items API",
+    "version": "2026-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.secure.freee.co.jp/public_api/authorize",
+      "accessTokenUrl": "https://accounts.secure.freee.co.jp/public_api/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List account items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/account_items",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Lists the account items / chart of accounts (勘定科目) for a company."
+        },
+        {
+          "info": {
+            "name": "Create an account item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/api/1/account_items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an account item"
+        },
+        {
+          "info": {
+            "name": "Get an account item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/account_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Get an account item"
+        },
+        {
+          "info": {
+            "name": "Update an account item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.freee.co.jp/api/1/account_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an account item"
+        },
+        {
+          "info": {
+            "name": "Delete an account item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.freee.co.jp/api/1/account_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Delete an account item"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

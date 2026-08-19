@@ -1,0 +1,1203 @@
+{
+  "item": [
+    {
+      "id": "1fb3f001-a44d-4684-bbd0-208e15e0c3cd",
+      "name": "Deals",
+      "description": {
+        "content": "Accounting deals / transactions (取引) - income and expense records.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4a06e3b-c29a-4656-978f-b980bc81f0da",
+          "name": "List deals",
+          "request": {
+            "name": "List deals",
+            "description": {
+              "content": "Lists accounting deals / transactions (取引) for a company. A deal is an income (収入) or expense (支出) record with one or more detail lines.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "deals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "company_id",
+                  "value": "<integer>",
+                  "description": "(Required) The freee company (事業所) ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "key": "partner_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_item_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Settlement status."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_issue_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_issue_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0668c97-bbaf-4690-9760-ba3184baaa71",
+              "name": "A list of deals.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "partner_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_item_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_issue_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_issue_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deals\": [\n    {\n      \"id\": 3732,\n      \"company_id\": 7106,\n      \"issue_date\": \"1977-07-07\",\n      \"due_date\": \"1965-06-20\",\n      \"amount\": 8900,\n      \"due_amount\": 7984,\n      \"type\": \"income\",\n      \"partner_id\": 6809,\n      \"status\": \"unsettled\",\n      \"details\": [\n        {\n          \"id\": 7737,\n          \"account_item_id\": 8957,\n          \"tax_code\": 2536,\n          \"amount\": 6358,\n          \"vat\": 2167,\n          \"description\": \"string\"\n        },\n        {\n          \"id\": 8914,\n          \"account_item_id\": 4693,\n          \"tax_code\": 3219,\n          \"amount\": 9764,\n          \"vat\": 9090,\n          \"description\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 5834,\n      \"company_id\": 1856,\n      \"issue_date\": \"2004-02-06\",\n      \"due_date\": \"1959-09-04\",\n      \"amount\": 2991,\n      \"due_amount\": 2720,\n      \"type\": \"expense\",\n      \"partner_id\": 3337,\n      \"status\": \"settled\",\n      \"details\": [\n        {\n          \"id\": 1216,\n          \"account_item_id\": 4009,\n          \"tax_code\": 6770,\n          \"amount\": 272,\n          \"vat\": 5587,\n          \"description\": \"string\"\n        },\n        {\n          \"id\": 5317,\n          \"account_item_id\": 7946,\n          \"tax_code\": 9756,\n          \"amount\": 3438,\n          \"vat\": 7716,\n          \"description\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9174394a-1d4e-4f0d-be98-1f67aa313c88",
+              "name": "Missing or invalid OAuth 2.0 Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "partner_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_item_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_issue_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_issue_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 6544,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae21dcbc-70b4-422e-b0a2-73f2684a3913",
+          "name": "Create a deal",
+          "request": {
+            "name": "Create a deal",
+            "description": {
+              "content": "Creates a new accounting deal (取引).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "deals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_id\": \"<integer>\",\n  \"issue_date\": \"<date>\",\n  \"type\": \"<string>\",\n  \"details\": [\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"due_date\": \"<date>\",\n  \"partner_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c2c8f011-40d1-4057-87e9-36faf7c14bb8",
+              "name": "The created deal.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": \"<integer>\",\n  \"issue_date\": \"<date>\",\n  \"type\": \"<string>\",\n  \"details\": [\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"due_date\": \"<date>\",\n  \"partner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deal\": {\n    \"id\": 4506,\n    \"company_id\": 1402,\n    \"issue_date\": \"2018-04-16\",\n    \"due_date\": \"1998-03-04\",\n    \"amount\": 8689,\n    \"due_amount\": 7402,\n    \"type\": \"income\",\n    \"partner_id\": 3645,\n    \"status\": \"settled\",\n    \"details\": [\n      {\n        \"id\": 8572,\n        \"account_item_id\": 7825,\n        \"tax_code\": 1273,\n        \"amount\": 6942,\n        \"vat\": 3403,\n        \"description\": \"string\"\n      },\n      {\n        \"id\": 8909,\n        \"account_item_id\": 5852,\n        \"tax_code\": 6703,\n        \"amount\": 6497,\n        \"vat\": 2038,\n        \"description\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a406ca5-18ba-4ad6-a4f6-99dd4dbee932",
+              "name": "The request was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": \"<integer>\",\n  \"issue_date\": \"<date>\",\n  \"type\": \"<string>\",\n  \"details\": [\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"due_date\": \"<date>\",\n  \"partner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 5562,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8a5d74c-703d-42e8-87c1-222651f0afaf",
+              "name": "Missing or invalid OAuth 2.0 Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": \"<integer>\",\n  \"issue_date\": \"<date>\",\n  \"type\": \"<string>\",\n  \"details\": [\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"due_date\": \"<date>\",\n  \"partner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 5562,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ec1b646-77be-40bc-9d3b-5673db05fa41",
+          "name": "Get a deal",
+          "request": {
+            "name": "Get a deal",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "deals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "company_id",
+                  "value": "<integer>",
+                  "description": "(Required) The freee company (事業所) ID the request is scoped to."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The numeric identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38207049-33e2-478e-8544-87fedd730aa7",
+              "name": "The requested deal.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deal\": {\n    \"id\": 4506,\n    \"company_id\": 1402,\n    \"issue_date\": \"2018-04-16\",\n    \"due_date\": \"1998-03-04\",\n    \"amount\": 8689,\n    \"due_amount\": 7402,\n    \"type\": \"income\",\n    \"partner_id\": 3645,\n    \"status\": \"settled\",\n    \"details\": [\n      {\n        \"id\": 8572,\n        \"account_item_id\": 7825,\n        \"tax_code\": 1273,\n        \"amount\": 6942,\n        \"vat\": 3403,\n        \"description\": \"string\"\n      },\n      {\n        \"id\": 8909,\n        \"account_item_id\": 5852,\n        \"tax_code\": 6703,\n        \"amount\": 6497,\n        \"vat\": 2038,\n        \"description\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "584331f2-b848-4997-b160-2c29f1e494c1",
+              "name": "Missing or invalid OAuth 2.0 Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 5562,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbbf3a01-b62f-4ad6-8c89-5ac50d2970b0",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 5562,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d43cab0-e9b6-4a90-a214-1cda45c24ebf",
+          "name": "Update a deal",
+          "request": {
+            "name": "Update a deal",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "deals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The numeric identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_id\": \"<integer>\",\n  \"issue_date\": \"<date>\",\n  \"type\": \"<string>\",\n  \"details\": [\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"due_date\": \"<date>\",\n  \"partner_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0306d85-cb77-44f5-9fda-168e48397dbf",
+              "name": "The updated deal.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": \"<integer>\",\n  \"issue_date\": \"<date>\",\n  \"type\": \"<string>\",\n  \"details\": [\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"due_date\": \"<date>\",\n  \"partner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deal\": {\n    \"id\": 4506,\n    \"company_id\": 1402,\n    \"issue_date\": \"2018-04-16\",\n    \"due_date\": \"1998-03-04\",\n    \"amount\": 8689,\n    \"due_amount\": 7402,\n    \"type\": \"income\",\n    \"partner_id\": 3645,\n    \"status\": \"settled\",\n    \"details\": [\n      {\n        \"id\": 8572,\n        \"account_item_id\": 7825,\n        \"tax_code\": 1273,\n        \"amount\": 6942,\n        \"vat\": 3403,\n        \"description\": \"string\"\n      },\n      {\n        \"id\": 8909,\n        \"account_item_id\": 5852,\n        \"tax_code\": 6703,\n        \"amount\": 6497,\n        \"vat\": 2038,\n        \"description\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91f784f7-610f-4717-852a-612856b29b96",
+              "name": "Missing or invalid OAuth 2.0 Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": \"<integer>\",\n  \"issue_date\": \"<date>\",\n  \"type\": \"<string>\",\n  \"details\": [\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"due_date\": \"<date>\",\n  \"partner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 5562,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09e07a6b-1070-4a1d-ac9a-cc910014a342",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": \"<integer>\",\n  \"issue_date\": \"<date>\",\n  \"type\": \"<string>\",\n  \"details\": [\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"account_item_id\": \"<integer>\",\n      \"tax_code\": \"<integer>\",\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"due_date\": \"<date>\",\n  \"partner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 5562,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e01c5644-c889-43e5-8e30-d1614275d2a9",
+          "name": "Delete a deal",
+          "request": {
+            "name": "Delete a deal",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "deals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "company_id",
+                  "value": "<integer>",
+                  "description": "(Required) The freee company (事業所) ID the request is scoped to."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The numeric identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5cddea1-3473-4b51-968b-eaa34e01a44b",
+              "name": "The deal was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d9eeae0-5ca5-4953-a300-cc189e1ee773",
+              "name": "Missing or invalid OAuth 2.0 Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 5562,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68fca5d0-b1c2-477c-83bf-e6576ac5353d",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status_code\": 5562,\n  \"errors\": [\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.freee.co.jp",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "read write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://accounts.secure.freee.co.jp/public_api/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.secure.freee.co.jp/public_api/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "50c9bcf8-45f1-4fba-84a3-c2e123db8a58",
+    "name": "freee API (Accounting and HR/Payroll) Account Items Deals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee). freee is a Japanese cloud accounting, invoicing, and HR / payroll SaaS. Accounting endpoints live under https://api.freee.co.jp/api/1 and HR / payroll endpoints under https://api.freee.co.jp/hr/api/v1. All requests are authenticated with an OAuth 2.0 (authorization code) access token sent as `Authorization: Bearer <access_token>`. Most reads and writes are scoped to a freee company via the `company_id` parameter. This document is grounded in freee's own OpenAPI schemas (github.com/freee/freee-api-schema) but is a curated subset - it does not reproduce every operation, field, or response of the freee platform. See the official reference for the complete surface.\n\nContact Support:\n Name: freee Developers Community",
+      "type": "text/plain"
+    }
+  }
+}

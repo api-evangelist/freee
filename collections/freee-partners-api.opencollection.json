@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "freee API (Accounting and HR/Payroll) Account Items Partners API",
+    "version": "2026-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.secure.freee.co.jp/public_api/authorize",
+      "accessTokenUrl": "https://accounts.secure.freee.co.jp/public_api/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List partners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/partners",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists trading partners / counterparties (取引先) for a company."
+        },
+        {
+          "info": {
+            "name": "Create a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/api/1/partners",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a partner"
+        },
+        {
+          "info": {
+            "name": "Get a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Get a partner"
+        },
+        {
+          "info": {
+            "name": "Update a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.freee.co.jp/api/1/partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a partner"
+        },
+        {
+          "info": {
+            "name": "Delete a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.freee.co.jp/api/1/partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier of the resource."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Delete a partner"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

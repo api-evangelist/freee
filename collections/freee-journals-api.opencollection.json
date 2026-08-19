@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "freee API (Accounting and HR/Payroll) Account Items Journals API",
+    "version": "2026-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.secure.freee.co.jp/public_api/authorize",
+      "accessTokenUrl": "https://accounts.secure.freee.co.jp/public_api/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Journals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request a journals export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/journals",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              },
+              {
+                "name": "download_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Starts an asynchronous export of journals (仕訳帳) for a company in CSV, PDF, or freee's yayoi format. Poll the reports status / download endpoints for the generated file."
+        },
+        {
+          "info": {
+            "name": "List manual journals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/manual_journals",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Lists manual journal entries (振替伝票) for a company."
+        },
+        {
+          "info": {
+            "name": "Create a manual journal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freee.co.jp/api/1/manual_journals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a manual journal"
+        },
+        {
+          "info": {
+            "name": "Get profit and loss trial balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freee.co.jp/api/1/reports/trial_pl",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "The freee company (事業所) ID the request is scoped to."
+              },
+              {
+                "name": "fiscal_year",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the profit-and-loss trial balance (試算表・損益計算書) for a company."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
