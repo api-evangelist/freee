@@ -11,6 +11,18 @@ description: freee K.K. (freee株式会社) is a Japanese cloud business-managem
   https://api.freee.co.jp/api/1 and HR / payroll endpoints under
   https://api.freee.co.jp/hr/api/v1, and freee publishes machine-readable OpenAPI
   schemas for its platform.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
