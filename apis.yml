@@ -40,7 +40,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/freee.png
 tags:
 - Accounting
 - Bookkeeping
-- HR
+- Human Resources
 - Payroll
 - Invoicing
 - Finance
@@ -265,6 +265,8 @@ apis:
   humanURL: https://developer.freee.co.jp/reference/accounting/reference
   baseURL: https://api.freee.co.jp/api/1
   tags:
+  - Tax
+  tags_raw:
   - Taxes
   properties:
   - type: OpenAPI
