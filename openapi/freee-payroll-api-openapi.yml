@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: freee API (Accounting and HR/) Account Items Payroll API
-  description: 'A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee). freee is a Japanese cloud accounting, invoicing, and HR / payroll SaaS. Accounting endpoints live under https://api.freee.co.jp/api/1 and HR / payroll endpoints under https://api.freee.co.jp/hr/api/v1. All requests are authenticated with an OAuth 2.0 (authorization code) access token sent as `Authorization: Bearer <access_token>`. Most reads and writes are scoped to a freee company via the `company_id` parameter. This document is grounded in freee''s own OpenAPI schemas (github.com/freee/freee-api-schema) but is a curated subset - it does not reproduce every operation, field, or response of the freee platform. See the official reference for the complete surface.'
+  title: freee API (Accounting and HR/) Payroll API
+  description: A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee).
   version: '2026-02-01'
   contact:
     name: freee Developers Community
@@ -68,6 +68,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
   schemas:
     Error:
       type: object
@@ -85,20 +99,6 @@ components:
                 type: array
                 items:
                   type: string
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 20
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

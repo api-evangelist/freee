@@ -1,18 +1,7 @@
 {
   "provider": "freee",
   "sources": [
-    "freee-account-items-api-openapi.yml",
-    "freee-attendance-api-openapi.yml",
-    "freee-companies-api-openapi.yml",
-    "freee-deals-api-openapi.yml",
-    "freee-employees-api-openapi.yml",
-    "freee-hr-users-api-openapi.yml",
-    "freee-invoices-api-openapi.yml",
-    "freee-journals-api-openapi.yml",
-    "freee-partners-api-openapi.yml",
-    "freee-payroll-api-openapi.yml",
-    "freee-taxes-api-openapi.yml",
-    "freee-wallet-transactions-api-openapi.yml"
+    "_original/freee-openapi.yml"
   ],
   "outputs": [
     "freee-account-items-api-openapi.yml",
@@ -31,6 +20,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "freee-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "freee-account-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-attendance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-companies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-deals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-employees-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-hr-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-journals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-partners-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-payroll-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-taxes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "freee-wallet-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

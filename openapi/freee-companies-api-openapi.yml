@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: freee API (Accounting and HR/Payroll) Account Items Companies API
-  description: 'A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee). freee is a Japanese cloud accounting, invoicing, and HR / payroll SaaS. Accounting endpoints live under https://api.freee.co.jp/api/1 and HR / payroll endpoints under https://api.freee.co.jp/hr/api/v1. All requests are authenticated with an OAuth 2.0 (authorization code) access token sent as `Authorization: Bearer <access_token>`. Most reads and writes are scoped to a freee company via the `company_id` parameter. This document is grounded in freee''s own OpenAPI schemas (github.com/freee/freee-api-schema) but is a curated subset - it does not reproduce every operation, field, or response of the freee platform. See the official reference for the complete surface.'
+  title: freee API (Accounting and HR/Payroll) Companies API
+  description: A representative, hand-authored subset of the public freee REST APIs for the freee Accounting product (会計freee) and the freee HR & Payroll product (人事労務freee).
   version: '2026-02-01'
   contact:
     name: freee Developers Community
@@ -65,20 +65,22 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          description: Company name (事業所名).
+        name_kana:
+          type: string
+        display_name:
+          type: string
+        role:
+          type: string
+          description: The authenticated user's role in this company.
     Error:
       type: object
       properties:
@@ -95,21 +97,6 @@ components:
                 type: array
                 items:
                   type: string
-    Company:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          description: Company name (事業所名).
-        name_kana:
-          type: string
-        display_name:
-          type: string
-        role:
-          type: string
-          description: The authenticated user's role in this company.
   parameters:
     PathId:
       name: id
@@ -118,6 +105,19 @@ components:
       description: The numeric identifier of the resource.
       schema:
         type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
