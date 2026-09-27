@@ -167,17 +167,17 @@ components:
       schema:
         type: integer
         default: 20
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
     PathId:
       name: id
       in: path
       required: true
       description: The numeric identifier of the resource.
-      schema:
-        type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
       schema:
         type: integer
   schemas:

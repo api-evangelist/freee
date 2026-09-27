@@ -61,13 +61,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Limit:
       name: limit
@@ -99,6 +92,13 @@ components:
                 type: array
                 items:
                   type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

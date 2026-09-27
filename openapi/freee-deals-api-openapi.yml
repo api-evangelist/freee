@@ -168,25 +168,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Limit:
       name: limit
@@ -195,13 +176,6 @@ components:
       schema:
         type: integer
         default: 20
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The numeric identifier of the resource.
-      schema:
-        type: integer
     CompanyIdQueryRequired:
       name: company_id
       in: query
@@ -215,40 +189,14 @@ components:
       required: false
       schema:
         type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The numeric identifier of the resource.
+      schema:
+        type: integer
   schemas:
-    Deal:
-      type: object
-      properties:
-        id:
-          type: integer
-        company_id:
-          type: integer
-        issue_date:
-          type: string
-          format: date
-        due_date:
-          type: string
-          format: date
-        amount:
-          type: integer
-        due_amount:
-          type: integer
-        type:
-          type: string
-          enum:
-          - income
-          - expense
-        partner_id:
-          type: integer
-        status:
-          type: string
-          enum:
-          - unsettled
-          - settled
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/DealDetail'
     DealDetail:
       type: object
       properties:
@@ -264,6 +212,22 @@ components:
           type: integer
         description:
           type: string
+    Error:
+      type: object
+      properties:
+        status_code:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              messages:
+                type: array
+                items:
+                  type: string
     DealCreateParams:
       type: object
       required:
@@ -304,22 +268,58 @@ components:
                 type: integer
               description:
                 type: string
-    Error:
+    Deal:
       type: object
       properties:
-        status_code:
+        id:
           type: integer
-        errors:
+        company_id:
+          type: integer
+        issue_date:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        amount:
+          type: integer
+        due_amount:
+          type: integer
+        type:
+          type: string
+          enum:
+          - income
+          - expense
+        partner_id:
+          type: integer
+        status:
+          type: string
+          enum:
+          - unsettled
+          - settled
+        details:
           type: array
           items:
-            type: object
-            properties:
-              type:
-                type: string
-              messages:
-                type: array
-                items:
-                  type: string
+            $ref: '#/components/schemas/DealDetail'
+  responses:
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

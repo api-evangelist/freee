@@ -164,14 +164,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    CompanyIdQueryRequired:
-      name: company_id
-      in: query
-      required: true
-      description: The freee company (事業所) ID the request is scoped to.
-      schema:
-        type: integer
   schemas:
     Error:
       type: object
@@ -189,6 +181,14 @@ components:
                 type: array
                 items:
                   type: string
+  parameters:
+    CompanyIdQueryRequired:
+      name: company_id
+      in: query
+      required: true
+      description: The freee company (事業所) ID the request is scoped to.
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

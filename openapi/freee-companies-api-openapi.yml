@@ -66,21 +66,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Company:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          description: Company name (事業所名).
-        name_kana:
-          type: string
-        display_name:
-          type: string
-        role:
-          type: string
-          description: The authenticated user's role in this company.
     Error:
       type: object
       properties:
@@ -97,14 +82,21 @@ components:
                 type: array
                 items:
                   type: string
-  parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The numeric identifier of the resource.
-      schema:
-        type: integer
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          description: Company name (事業所名).
+        name_kana:
+          type: string
+        display_name:
+          type: string
+        role:
+          type: string
+          description: The authenticated user's role in this company.
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -118,6 +110,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The numeric identifier of the resource.
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

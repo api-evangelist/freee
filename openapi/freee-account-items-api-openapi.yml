@@ -143,35 +143,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The numeric identifier of the resource.
-      schema:
-        type: integer
-    CompanyIdQueryRequired:
-      name: company_id
-      in: query
-      required: true
-      description: The freee company (事業所) ID the request is scoped to.
-      schema:
-        type: integer
   schemas:
-    AccountItem:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        tax_code:
-          type: integer
-        account_category:
-          type: string
-        available:
-          type: boolean
     Error:
       type: object
       properties:
@@ -188,6 +160,34 @@ components:
                 type: array
                 items:
                   type: string
+    AccountItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        tax_code:
+          type: integer
+        account_category:
+          type: string
+        available:
+          type: boolean
+  parameters:
+    CompanyIdQueryRequired:
+      name: company_id
+      in: query
+      required: true
+      description: The freee company (事業所) ID the request is scoped to.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The numeric identifier of the resource.
+      schema:
+        type: integer
   responses:
     NotFound:
       description: The requested resource was not found.
