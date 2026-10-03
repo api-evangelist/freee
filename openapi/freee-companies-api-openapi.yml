@@ -66,6 +66,21 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          description: Company name (事業所名).
+        name_kana:
+          type: string
+        display_name:
+          type: string
+        role:
+          type: string
+          description: The authenticated user's role in this company.
     Error:
       type: object
       properties:
@@ -82,30 +97,15 @@ components:
                 type: array
                 items:
                   type: string
-    Company:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          description: Company name (事業所名).
-        name_kana:
-          type: string
-        display_name:
-          type: string
-        role:
-          type: string
-          description: The authenticated user's role in this company.
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

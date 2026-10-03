@@ -61,7 +61,20 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
     Limit:
       name: limit
       in: query
@@ -69,12 +82,6 @@ components:
       schema:
         type: integer
         default: 20
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
   schemas:
     Error:
       type: object
@@ -92,13 +99,6 @@ components:
                 type: array
                 items:
                   type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

@@ -168,34 +168,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 20
-    CompanyIdQueryRequired:
-      name: company_id
-      in: query
-      required: true
-      description: The freee company (事業所) ID the request is scoped to.
-      schema:
-        type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The numeric identifier of the resource.
-      schema:
-        type: integer
   schemas:
     DealDetail:
       type: object
@@ -212,22 +184,6 @@ components:
           type: integer
         description:
           type: string
-    Error:
-      type: object
-      properties:
-        status_code:
-          type: integer
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              messages:
-                type: array
-                items:
-                  type: string
     DealCreateParams:
       type: object
       required:
@@ -268,6 +224,22 @@ components:
                 type: integer
               description:
                 type: string
+    Error:
+      type: object
+      properties:
+        status_code:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              messages:
+                type: array
+                items:
+                  type: string
     Deal:
       type: object
       properties:
@@ -302,6 +274,12 @@ components:
           items:
             $ref: '#/components/schemas/DealDetail'
   responses:
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: The request was malformed or failed validation.
       content:
@@ -314,12 +292,34 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The numeric identifier of the resource.
+      schema:
+        type: integer
+    CompanyIdQueryRequired:
+      name: company_id
+      in: query
+      required: true
+      description: The freee company (事業所) ID the request is scoped to.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
   securitySchemes:
     oauth2:
       type: oauth2
