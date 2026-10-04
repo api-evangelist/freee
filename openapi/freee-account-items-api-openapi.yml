@@ -144,18 +144,33 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    CompanyIdQueryRequired:
+      name: company_id
+      in: query
+      required: true
+      description: The freee company (事業所) ID the request is scoped to.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The numeric identifier of the resource.
+      schema:
+        type: integer
   schemas:
     AccountItem:
       type: object
@@ -186,21 +201,6 @@ components:
                 type: array
                 items:
                   type: string
-  parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The numeric identifier of the resource.
-      schema:
-        type: integer
-    CompanyIdQueryRequired:
-      name: company_id
-      in: query
-      required: true
-      description: The freee company (事業所) ID the request is scoped to.
-      schema:
-        type: integer
   securitySchemes:
     oauth2:
       type: oauth2
