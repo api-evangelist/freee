@@ -1,0 +1,73 @@
+slug: freee
+provider: freee
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Journals
+  spec_file: freee-journals-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.9
+  evidence: POST /api/1/manual_journals  Create a manual journal; GET /api/1/reports/trial_pl  Get profit
+    and loss trial balance
+  reason: Manual journal entries, journal exports and trial balance reporting are core general ledger
+    bookkeeping operations.
+- tag: Account Items
+  spec_file: freee-account-items-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.85
+  evidence: GET /api/1/account_items getAccountItems List account items; schema AccountItem
+  reason: Account items in freee Accounting (会計freee) are the chart-of-accounts entries; CRUD over them
+    is General Ledger Management ('Chart of accounts, journals, period close').
+- tag: Employees
+  spec_file: freee-employees-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: 'GET /hr/api/v1/employees  List employees; POST /hr/api/v1/employees  Create an employee;
+    schemas: Employee'
+  reason: CRUD over employee master records in the HR & Payroll product is employee record keeping / HR
+    service delivery.
+- tag: Attendance
+  spec_file: freee-attendance-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /hr/api/v1/employees/{employee_id}/time_clocks  List time clocks; GET /hr/api/v1/employees/{employee_id}/work_records/{date}  Get
+    a work record
+  reason: Time clock and work record operations under the HR/Payroll product are employee time-and-attendance
+    administration, part of HR operations/service delivery on employee records. No L2 for time & attendance
+    specifically exists, so HR Operations Management is the closest fit.
+- tag: Invoices
+  spec_file: freee-invoices-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.8
+  evidence: GET /api/1/invoices  List invoices; GET /api/1/quotations  List quotations
+  reason: Outbound customer invoices and quotations in the accounting product correspond to customer invoicing
+    under Accounts Receivable Management.
+- tag: Payroll
+  spec_file: freee-payroll-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /hr/api/v1/salaries/employee_payroll_statements  List employee payroll statements
+  reason: Retrieval of employee payroll statements is payroll administration, explicitly within HR Operations
+    Management.

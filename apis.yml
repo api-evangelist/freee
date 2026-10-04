@@ -302,6 +302,9 @@ apis:
   - type: APIReference
     url: https://developer.freee.co.jp/reference/hr/reference
 common:
+- type: CapabilityMap
+  url: capabilities/freee-capability-edges.yml
+  name: freee Business Capability Map
 - type: AgenticAccess
   url: agentic-access/freee-agentic-access.yml
 - type: DomainSecurity
