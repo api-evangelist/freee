@@ -56,7 +56,7 @@ tags_raw:
 - SaaS
 - Japan
 created: '2026-07-12'
-modified: '2026-07-12'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: freee:freee-account-items-api
@@ -302,6 +302,8 @@ apis:
   - type: APIReference
     url: https://developer.freee.co.jp/reference/hr/reference
 common:
+- url: https://www.freee.co.jp/blog/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/freee-capability-edges.yml
   name: freee Business Capability Map
