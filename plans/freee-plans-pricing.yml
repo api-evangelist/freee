@@ -187,3 +187,55 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - seat
+  - subscription
+  units:
+  - negotiated
+  - seat
+  plans:
+  - name: freee Accounting - Starter (会計freee スターター 法人)
+    access: paid
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: freee Accounting - Standard (会計freee スタンダード 法人)
+    access: paid
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: freee Accounting - Advance / Enterprise (アドバンス / エンタープライズ)
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
+  - name: freee HR & Payroll - Starter (人事労務freee スターター)
+    access: paid
+    model: seat
+    model_how: derived
+    units:
+    - other
+    - seat
+    periods:
+    - month
+  - name: freee HR & Payroll - Standard (人事労務freee スタンダード)
+    access: paid
+    model: seat
+    model_how: derived
+    units:
+    - other
+    - seat
+    periods:
+    - month
