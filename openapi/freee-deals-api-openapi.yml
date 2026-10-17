@@ -168,6 +168,34 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+    CompanyIdQueryRequired:
+      name: company_id
+      in: query
+      required: true
+      description: The freee company (事業所) ID the request is scoped to.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The numeric identifier of the resource.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
   schemas:
     DealCreateParams:
       type: object
@@ -209,21 +237,6 @@ components:
                 type: integer
               description:
                 type: string
-    DealDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-        account_item_id:
-          type: integer
-        tax_code:
-          type: integer
-        amount:
-          type: integer
-        vat:
-          type: integer
-        description:
-          type: string
     Error:
       type: object
       properties:
@@ -240,6 +253,21 @@ components:
                 type: array
                 items:
                   type: string
+    DealDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_item_id:
+          type: integer
+        tax_code:
+          type: integer
+        amount:
+          type: integer
+        vat:
+          type: integer
+        description:
+          type: string
     Deal:
       type: object
       properties:
@@ -292,34 +320,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    CompanyIdQueryRequired:
-      name: company_id
-      in: query
-      required: true
-      description: The freee company (事業所) ID the request is scoped to.
-      schema:
-        type: integer
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 20
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The numeric identifier of the resource.
-      schema:
-        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

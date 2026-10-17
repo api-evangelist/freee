@@ -147,19 +147,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Limit:
       name: limit
@@ -175,12 +162,6 @@ components:
       description: The freee company (事業所) ID the request is scoped to.
       schema:
         type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
     PathId:
       name: id
       in: path
@@ -188,7 +169,28 @@ components:
       description: The numeric identifier of the resource.
       schema:
         type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
   schemas:
+    Partner:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        long_name:
+          type: string
+        name_kana:
+          type: string
+        country_code:
+          type: string
     Error:
       type: object
       properties:
@@ -205,21 +207,19 @@ components:
                 type: array
                 items:
                   type: string
-    Partner:
-      type: object
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        name:
-          type: string
-        long_name:
-          type: string
-        name_kana:
-          type: string
-        country_code:
-          type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

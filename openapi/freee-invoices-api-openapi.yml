@@ -94,19 +94,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 Bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Limit:
       name: limit
@@ -122,12 +109,6 @@ components:
       description: The freee company (事業所) ID the request is scoped to.
       schema:
         type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
     PathId:
       name: id
       in: path
@@ -135,7 +116,42 @@ components:
       description: The numeric identifier of the resource.
       schema:
         type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        status_code:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              messages:
+                type: array
+                items:
+                  type: string
     Invoice:
       type: object
       properties:
@@ -155,22 +171,6 @@ components:
         invoice_status:
           type: string
           description: Invoice lifecycle status (draft, applying, approved, submitted, unsubmitted).
-    Error:
-      type: object
-      properties:
-        status_code:
-          type: integer
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              messages:
-                type: array
-                items:
-                  type: string
   securitySchemes:
     oauth2:
       type: oauth2
