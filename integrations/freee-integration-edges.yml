@@ -124,6 +124,38 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-agent-skills.py
   first_seen: '2026-10-20'
+- partner_name: Japan FSA registered Electronic Payment Services Operators
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.fsa.go.jp/menkyo/menkyoj/dendai.pdf
+  category: Japanese electronic payment services operator registration (Banking Act, bank-API intermediary)
+  contract_reference:
+    register: Japan FSA registered Electronic Payment Services Operators
+    spec_file: null
+    standard: null
+    role: licensed-participant
+    registrations:
+    - registered_name: フリー株式会社
+      register_id: 関東財務局長 （電代）第1号
+      corporate_number: '7010401100770'
+      register_country: JP
+      matched_domain: freee.co.jp
+      matched_by: domain
+      en_name: freee K.K.
+      registered: '2018-09-26'
+      identity: wikidata Q18455557 'freee K.K.' P3225 7010401100770 (the register's corporate number) P856 https://www.freee.co.jp/
+    signal_note: 'participation only: a Financial Services Agency registration; no API conformance is published
+      by this register'
+    detected_by: sweep-japan-fsa-registered-fintech.py
+    detected: '2026-10-21'
+    identity_source: wikidata P3225 (the register's Japanese corporate number) -> P856 (labelled provenance step;
+      Kin 2026-10-15 decision 1)
+  detected_by: sweep-japan-fsa-registered-fintech.py
+  first_seen: '2026-10-21'
 method: searched
 checked:
 - https://zapier.com/api/v4/apps/
@@ -135,5 +167,12 @@ checked:
 - https://officialskills.sh/sitemap.xml
 - https://skillsmp.com/sitemap.xml
 - https://www.skills.sh/sitemap.xml
+- https://www.fsa.go.jp/en/regulated/licensed/denshikessaisyudan.pdf
+- https://www.fsa.go.jp/en/regulated/licensed/en_kasoutuka.pdf
+- https://www.fsa.go.jp/en/regulated/licensed/index.html
+- https://www.fsa.go.jp/menkyo/menkyoj/daisan.pdf
+- https://www.fsa.go.jp/menkyo/menkyoj/dendai.pdf
+- https://www.fsa.go.jp/menkyo/menkyoj/kasoutuka.pdf
+- https://www.fsa.go.jp/menkyo/menkyoj/shikin_idou.pdf
 source:
 - https://zapier.com/api/v4/apps/
