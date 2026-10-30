@@ -1,4 +1,4 @@
-# freee (freee)
+# freee
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,178 +64,140 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-freee K.K. (freee株式会社) is a Japanese cloud business-management SaaS company. Its core products are **freee Accounting** (会計freee) — cloud accounting and bookkeeping — and **freee HR & Payroll** (人事労務freee) — HR, attendance, and payroll — plus invoicing (freee請求書) and sales management (freee販売). freee publishes well-documented public REST APIs for both accounting and HR.
+freee K.K. (freee株式会社) is a Japanese cloud business-management SaaS company. Its core products are freee Accounting (会計freee) - cloud accounting and bookkeeping - and freee HR & Payroll (人事労務freee) - HR, attendance, and payroll - plus invoicing (freee請求書) and sales management. freee exposes well-documented public REST APIs for both accounting and HR, authenticated with OAuth 2.0 (authorization code). Accounting endpoints live under https://api.freee.co.jp/api/1 and HR / payroll endpoints under https://api.freee.co.jp/hr/api/v1, and freee publishes machine-readable OpenAPI schemas for its platform.
 
-## Access model (honest summary)
+**Areas:** Accounting · Bookkeeping · Human Resources · Payroll · Invoicing · Finance · Software-as-a-Service · Japan
 
-- **This is freee the Japanese accounting company (freee.co.jp) — not the English word "free."**
-- **Auth:** OAuth 2.0 **authorization code** grant. You register an app in the freee Developers console for a `client_id` / `client_secret`, send the user through the consent flow, then exchange the code for an access token (and refresh token). The access token is sent on every request as `Authorization: Bearer <access_token>`. Authorization endpoint `https://accounts.secure.freee.co.jp/public_api/authorize`, token endpoint `https://accounts.secure.freee.co.jp/public_api/token`, scopes `read` and `write`.
-- **Base hosts:** Accounting under `https://api.freee.co.jp/api/1`; HR & Payroll under `https://api.freee.co.jp/hr/api/v1`.
-- **Scoping:** most accounting and HR calls are scoped to a freee company (事業所) via a `company_id` parameter.
-- **Region:** Japan. The product UI and most documentation are in Japanese; English developer material also exists. Field names in this entry are given in English with the Japanese term in parentheses.
-- **Protocol:** request/response REST over HTTPS only. freee does **not** expose a documented public WebSocket API; change detection is done by polling with date-range filters.
-- **Included with subscription:** API access is included with a paid freee plan — there is no separate metered API fee.
+## freee on APIs.io
 
-freee publishes machine-readable OpenAPI schemas at [github.com/freee/freee-api-schema](https://github.com/freee/freee-api-schema) and maintains official SDKs (PHP, Java, and others) at [github.com/freee](https://github.com/freee). The bundled `openapi/freee-openapi.yml` here is a curated, high-fidelity **subset** grounded in those schemas — the real accounting schema defines 91 paths and the HR schema 68 paths.
+Everything profiled for freee is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/freee/](https://apis.io/providers/freee/)** — or go straight to one of the APIs or properties below.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/freee/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/freee/refs/heads/main/apis.yml)
+### APIs (12)
 
-## Tags
+- [freee Account Items API](https://apis.io/apis/freee/freee-account-items-api/) — Accounting account items / chart of accounts (勘定科目).
+- [freee Attendance API](https://apis.io/apis/freee/freee-attendance-api/) — Time clocks (打刻) and work records (勤怠).
+- [freee Companies API](https://apis.io/apis/freee/freee-companies-api/) — freee companies (事業所) the authenticated user can access.
+- [freee Deals API](https://apis.io/apis/freee/freee-deals-api/) — Accounting deals / transactions (取引) - income and expense records.
+- [freee Employees API](https://apis.io/apis/freee/freee-employees-api/) — HR employees (従業員).
+- [freee HR Users API](https://apis.io/apis/freee/freee-hr-users-api/) — Authenticated HR user context.
+- [freee Invoices API](https://apis.io/apis/freee/freee-invoices-api/) — Issued invoices and quotations (請求書・見積書).
+- [freee Journals API](https://apis.io/apis/freee/freee-journals-api/) — Journals (仕訳帳), manual journals, and trial-balance reports.
+- [freee Partners API](https://apis.io/apis/freee/freee-partners-api/) — Trading partners / counterparties (取引先).
+- [freee Payroll API](https://apis.io/apis/freee/freee-payroll-api/) — Employee payroll statements (給与明細) and bonuses.
+- [freee Taxes API](https://apis.io/apis/freee/freee-taxes-api/) — Tax codes (税区分) available to a company.
+- [freee Wallet Transactions API](https://apis.io/apis/freee/freee-wallet-transactions-api/) — Wallet transactions / statement lines (明細) and walletables (口座).
 
-- Accounting
-- Bookkeeping
-- HR
-- Payroll
-- Invoicing
-- Finance
-- SaaS
-- Japan
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### freee Accounting Deals API
+- [Freee Agentic Access](https://apis.io/agentic-access/freee/freee-agentic-access/)
 
-Create, list, get, update, and delete accounting deals / transactions (取引) — income and expense records with account-item detail lines, tax codes, partners, and settlement status — scoped to a freee company.
+#### Collections (13)
 
-- **Human URL:** [https://developer.freee.co.jp/reference/accounting/reference](https://developer.freee.co.jp/reference/accounting/reference)
-- **Base URL:** `https://api.freee.co.jp/api/1`
+Postman and Open Collection request collections.
 
-#### Tags
+- [freee API (Accounting and HR/Payroll)](https://apis.io/collections/freee/open-freee/)
+- [freee API (Accounting and HR/Payroll) Account Items API](https://apis.io/collections/freee/open-freee-account-items-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Attendance API](https://apis.io/collections/freee/open-freee-attendance-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Companies API](https://apis.io/collections/freee/open-freee-companies-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Deals API](https://apis.io/collections/freee/open-freee-deals-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Employees API](https://apis.io/collections/freee/open-freee-employees-api/)
+- [freee API (Accounting and HR/Payroll) Account Items HR Users API](https://apis.io/collections/freee/open-freee-hr-users-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Invoices API](https://apis.io/collections/freee/open-freee-invoices-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Journals API](https://apis.io/collections/freee/open-freee-journals-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Partners API](https://apis.io/collections/freee/open-freee-partners-api/)
+- [freee API (Accounting and HR/) Account Items Payroll API](https://apis.io/collections/freee/open-freee-payroll-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Taxes API](https://apis.io/collections/freee/open-freee-taxes-api/)
+- [freee API (Accounting and HR/Payroll) Account Items Wallet Transactions API](https://apis.io/collections/freee/open-freee-wallet-transactions-api/)
 
-- Accounting
-- Deals
-- Transactions
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://developer.freee.co.jp/)
-- [API Reference](https://developer.freee.co.jp/reference/accounting/reference)
-- [OpenAPI](openapi/freee-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/freee.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/freee.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Freee Authentication](https://apis.io/security/freee/freee-authentication/)
+- [Freee Domain Security](https://apis.io/security/freee/freee-domain-security/)
 
-### freee Accounting Account Items API
+#### Plans and pricing (1)
 
-Manage a company's account items / chart of accounts (勘定科目) and related tax codes (税区分) that classify each line of a deal or journal.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://developer.freee.co.jp/reference/accounting/reference](https://developer.freee.co.jp/reference/accounting/reference)
-- **Base URL:** `https://api.freee.co.jp/api/1`
+- [Freee Plans Pricing](https://apis.io/plans/freee/freee-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Accounting
-- Account Items
-- Chart of Accounts
+Published request limits.
 
-### freee Accounting Partners API
+- [Freee Rate Limits](https://apis.io/rate-limits/freee/freee-rate-limits/)
 
-Create, list, get, update, and delete trading partners / counterparties (取引先) — the customers and suppliers referenced by deals, invoices, and payments.
+#### FinOps (1)
 
-- **Human URL:** [https://developer.freee.co.jp/reference/accounting/reference](https://developer.freee.co.jp/reference/accounting/reference)
-- **Base URL:** `https://api.freee.co.jp/api/1`
+What the API costs to run, by operation.
 
-#### Tags
+- [Freee Finops](https://apis.io/finops/freee/freee-finops/)
 
-- Accounting
-- Partners
-- Counterparties
+## Where to find this API
 
-### freee Accounting Invoices and Quotations API
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-Read issued invoices (請求書) and quotations / estimates (見積書) for a company, including invoice number, issue date, partner, totals, and lifecycle status.
-
-- **Human URL:** [https://developer.freee.co.jp/reference/accounting/reference](https://developer.freee.co.jp/reference/accounting/reference)
-- **Base URL:** `https://api.freee.co.jp/api/1`
-
-#### Tags
-
-- Accounting
-- Invoicing
-- Quotations
-
-### freee Accounting Wallet Transactions API
-
-Manage wallet transactions / statement lines (明細) and the walletables (口座) they belong to — bank accounts, credit cards, and wallets — for bank reconciliation and cash-flow tracking.
-
-- **Human URL:** [https://developer.freee.co.jp/reference/accounting/reference](https://developer.freee.co.jp/reference/accounting/reference)
-- **Base URL:** `https://api.freee.co.jp/api/1`
-
-#### Tags
-
-- Accounting
-- Wallet Transactions
-- Bank Accounts
-
-### freee Accounting Journals and Reports API
-
-Request asynchronous journal (仕訳帳) exports (CSV / PDF / yayoi), manage manual journals (振替伝票), and read trial-balance reports such as the profit-and-loss trial balance (試算表).
-
-- **Human URL:** [https://developer.freee.co.jp/reference/accounting/reference](https://developer.freee.co.jp/reference/accounting/reference)
-- **Base URL:** `https://api.freee.co.jp/api/1`
-
-#### Tags
-
-- Accounting
-- Journals
-- Reports
-
-### freee HR Employees API
-
-Create, list, get, update, and delete employees (従業員) in freee人事労務, plus the authenticated HR user context and the companies (事業所) they can access.
-
-- **Human URL:** [https://developer.freee.co.jp/reference/hr/reference](https://developer.freee.co.jp/reference/hr/reference)
-- **Base URL:** `https://api.freee.co.jp/hr/api/v1`
-
-#### Tags
-
-- HR
-- Employees
-- Japan
-
-### freee HR Payroll API
-
-Read employee salary and bonus payroll statements (給与明細・賞与明細) by company and pay month for downstream payroll, accounting, and reporting workflows.
-
-- **Human URL:** [https://developer.freee.co.jp/reference/hr/reference](https://developer.freee.co.jp/reference/hr/reference)
-- **Base URL:** `https://api.freee.co.jp/hr/api/v1`
-
-#### Tags
-
-- HR
-- Payroll
-- Salary
-
-### freee HR Attendance API
-
-Register time-clock punches (打刻) and read or edit daily attendance work records (勤怠) for employees — clock in / out, breaks, and worked hours.
-
-- **Human URL:** [https://developer.freee.co.jp/reference/hr/reference](https://developer.freee.co.jp/reference/hr/reference)
-- **Base URL:** `https://api.freee.co.jp/hr/api/v1`
-
-#### Tags
-
-- HR
-- Attendance
-- Time Tracking
-
-## Common Properties
-
-- [Domain Security](security/freee-domain-security.yml)
-- [Authentication](authentication/freee-authentication.yml)
-- [GitHub Organization](https://github.com/freee)
-- [LinkedIn](https://www.linkedin.com/company/freeekk)
 - [Website](https://www.freee.co.jp/)
 - [Documentation](https://developer.freee.co.jp/)
-- [Plans](plans/freee-plans-pricing.yml)
-- [Rate Limits](rate-limits/freee-rate-limits.yml)
-- [Fin Ops](finops/freee-finops.yml)
+- [Blog](https://www.freee.co.jp/blog/)
+- [GitHub](https://github.com/freee)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 51.2 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 22.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Employment & Payroll
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/freee/](https://apis.io/providers/freee/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for freee: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/freee/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
